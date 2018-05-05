@@ -1,0 +1,8 @@
+{
+  "name": "admin-fe",
+  "version": "1.0.0",
+  "description": "admin back manage",
+  "main": "index.js",
+  "author": "loading",
+  "license": "MIT"
+}
