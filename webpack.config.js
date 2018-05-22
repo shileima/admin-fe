@@ -4,11 +4,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack           = require('webpack')
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/app.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/dist/',
         filename: 'js/app.js'
+    },
+    resolve: {
+        alias: {
+            page      : path.resolve(__dirname, 'src/page'),
+            component : path.resolve(__dirname, 'src/component')
+        }
     },
     plugins: [
         //处理html文件
@@ -24,12 +30,15 @@ module.exports = {
         })
     ],
     devServer: {
-        port:8086
+        port:8086,
+        historyApiFallback: {
+            index: '/dist/index.html'
+        }
     },
     module: {
         rules: [
           {
-            test: /\.js$/,
+            test: /\.jsx$/,
             exclude: /(node_modules)/,
             use: {
                 loader: 'babel-loader',
