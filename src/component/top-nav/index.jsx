@@ -1,9 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom'; 
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import MUtil from 'util/mm.jsx';
+
+const _mm = new MUtil();
 
 class TopNav extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            username: _mm.getStorage('userInfo').username || '匿名用户'
+        }
     }
     render(){
         return <div className="navbar navbar-default top-navbar">
@@ -14,7 +20,7 @@ class TopNav extends React.Component{
                     <li className="dropdown">
                         <a className="dropdown-toggle" data-toggle="dropdown" href="javascript:;" aria-expanded="false">
                             <i className="fa fa-user fa-fw"></i> 
-                            <span>欢迎，admin</span>
+                            <span>欢迎，{this.state.username}</span>
                             <i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">
