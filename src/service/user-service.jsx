@@ -33,6 +33,14 @@ class User {
             msg: '验证通过！'
         }
     }
+
+    // 退出请求
+    logout(){
+        return _mm.request({
+            type: 'post',
+            url: '/user/logout.do'
+        })
+    }
 }
 
 export default User;
