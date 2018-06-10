@@ -7,7 +7,7 @@ class MUtil{
                 url      : param.url || '',
                 dataType : param.dataType || 'json',
                 data     : param.data || null,
-                success(res){
+                success  : res => {
                     if(res.status === 0){
                         typeof resolve === 'function' && resolve(res.data,res.msg);
                     }
@@ -18,7 +18,7 @@ class MUtil{
                         typeof reject === 'function' && reject(res.msg,res.data);
                     }
                 },
-                error(err){
+                error : err => {
                     typeof reject === 'function' && reject(err.statusText);
 
                 }
@@ -27,7 +27,7 @@ class MUtil{
     }
     // 未登录状态，跳转登录页面
     doLogin(){
-        window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname)
+        window.location.href = '/login?redirect=' + window.location.pathname
     }
     // 获取 登陆后跳转地址
     getRedirect(name){

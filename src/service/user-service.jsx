@@ -37,8 +37,19 @@ class User {
     // 退出请求
     logout(){
         return _mm.request({
+            type : 'post',
+            url  : '/user/logout.do'
+        })
+    }
+
+    // 获取用户列表
+    getUserList(pageNum){
+        return _mm.request({
             type: 'post',
-            url: '/user/logout.do'
+            url : '/manage/user/list.do',
+            data: {
+                pageNum: pageNum
+            }
         })
     }
 }
