@@ -54,5 +54,3 @@ class TableList extends React.Component {
 }
 
 export default TableList;
-
-

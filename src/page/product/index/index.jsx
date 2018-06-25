@@ -38,6 +38,23 @@ class ProductList extends React.Component{
             this.loadProductList();
         })
     }
+    onSetProductStatus(e, productId, currentStatus){
+        let newStatus   = currentStatus == 1 ? 2 : 1,
+            confirmTips = currentStatus == 1 ? '确定要下架商品吗？' : '确定要上架商品吗？';
+            if(window.confirm(confirmTips)){
+                _product.setProductStatus({
+                    productId: productId,
+                    status   : newStatus
+                }).then(res => {
+                    _mm.successTips(res)
+                    this.loadProductList()
+                }, res => {
+                    _mm.errTips(res)
+                })
+            }
+
+
+    }
     render(){
         let tableHeads = [
             {name:'商品ID',width:'10%'},
@@ -60,7 +77,11 @@ class ProductList extends React.Component{
                                 </td>
                                 <td>￥{product.price}</td>
                                 <td>
-                                    <span>{product.status == 1 ? '在售' : '已下架'}</span>
+                                    <p>{product.status == 1 ? '在售' : '已下架'}</p>
+                                    <button className = "btn btn-xs btn-warning"
+                                    onClick={ e => {this.onSetProductStatus(e, product.id, product.status)}}>
+                                        {product.status == 1 ? '下架' : '上架'}
+                                    </button>
                                 </td> 
                                 <td>
                                     <Link to={ `/product/detail/${product.id}` }>查看详情</Link>
