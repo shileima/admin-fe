@@ -1,7 +1,7 @@
 import MUtil from 'util/mm.jsx';
 const _mm = new MUtil();
 
-class User {
+class Product {
     // 用户登录
     login(loginInfo){
         //return _mm.request({
@@ -33,4 +33,4 @@ class User {
     }
 }
 
-export default User;
+export default Product;

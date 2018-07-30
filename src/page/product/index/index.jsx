@@ -52,8 +52,6 @@ class ProductList extends React.Component{
                     _mm.errTips(res)
                 })
             }
-
-
     }
     render(){
         let tableHeads = [
@@ -64,7 +62,7 @@ class ProductList extends React.Component{
             {name:'操作',width:'15%'}
         ]
         return <div id="page-wrapper">
-            <PageTitle title="用户列表"></PageTitle>
+            <PageTitle title="商品列表"></PageTitle>
             <TableList tableHeads={tableHeads} >
                 {
                     this.state.list.map((product,index) => {

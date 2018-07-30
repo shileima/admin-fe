@@ -5,12 +5,10 @@ import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-ro
 import Layout       from 'component/layout/index.jsx';
 import Home         from 'page/home/index.jsx';
 import UserList     from 'page/user/index.jsx';
-import ProductList  from 'page/product/index/index.jsx';
 import Login        from 'page/login/index.jsx';
 import ErrorPage    from 'page/error/index.jsx';
 
 import ProductRouter from 'page/product/router.jsx';
-
 
 class App extends React.Component{
     render(){
@@ -18,9 +16,10 @@ class App extends React.Component{
             <Layout>
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <ProductRouter />                           
+                    {/* <ProductRouter /> */} {/* 放这里会影响 user 的路由 */}  
                     <Route path="/user/list" component={UserList} />   
-                    <Redirect exact from="/user" to="/user/list" />                         
+                    <Redirect exact from="/user" to="/user/list" />  
+                    <ProductRouter />                                         
                     <Route component={ErrorPage} />                            
                 </Switch>
             </Layout>
@@ -31,7 +30,7 @@ class App extends React.Component{
                     <Switch>
                         <Route exact path="/login" component={Login} />
                         {/* props 去掉也可以运行 */}
-                        <Route path="/" render={ props => LayoutRouter} />                            
+                        <Route path="/" render={ (props) => LayoutRouter} />  
                     </Switch>  
                 </Router>
             </div>
