@@ -8,6 +8,7 @@ import MUtil      from 'util/mm.jsx';
 import Product    from 'service/product-service.jsx';
 
 import TableList  from 'util/table-list/index.jsx'
+import ProductSearch from '../index-list-search.jsx';
 const _mm      =   new MUtil();
 const _product =   new Product();
 
@@ -53,6 +54,9 @@ class ProductList extends React.Component{
                 })
             }
     }
+    onSearch(searchType,searchKeywords){
+        console.log(searchType,searchKeywords)
+    }
     render(){
         let tableHeads = [
             {name:'商品ID',width:'10%'},
@@ -63,6 +67,7 @@ class ProductList extends React.Component{
         ]
         return <div id="page-wrapper">
             <PageTitle title="商品列表"></PageTitle>
+            <ProductSearch onSearch={(searchType,searchKeywords)=>{this.onSearch(searchType,searchKeywords)}} />
             <TableList tableHeads={tableHeads} >
                 {
                     this.state.list.map((product,index) => {
