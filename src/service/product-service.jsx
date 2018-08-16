@@ -13,14 +13,27 @@ class Product {
         })
     }
 
-    // 获取用户列表
-    getProductList(pageNum){
+    // 获取产品列表
+    getProductList(listParam){
+        let url = '';
+        let data = {};
+        if(listParam.listType === 'list' ){
+            url  = '/manage/product/list.do';
+            data = {
+                pageNum: listParam.pageNum
+            }
+        }else if(listParam.listType === 'search'){
+            url  = '/manage/product/search.do';
+            data = {
+                pageNum              : listParam.pageNum,
+                [listParam.searchType] : listParam.searchKeywords
+            }
+        }
+
         return _mm.request({
             type: 'post',
-            url : '/manage/product/list.do',
-            data: {
-                pageNum: pageNum
-            }
+            url : url,
+            data: data
         })
     }
 

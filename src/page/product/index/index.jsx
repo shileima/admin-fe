@@ -17,14 +17,24 @@ class ProductList extends React.Component{
         super(props)
         this.state = {
             list: [],
-            pageNum: 1
+            pageNum: 1,
+            listType: 'list'
         }
     }
     componentDidMount(){
         this.loadProductList();
     }
     loadProductList(){
-        _product.getProductList(this.state.pageNum).then(
+        let listParam = {};
+        listParam.listType = this.state.listType;
+        listParam.pageNum = this.state.pageNum;
+
+        if(this.state.listType === 'search'){
+            listParam.searchType = this.state.searchType;
+            listParam.searchKeywords = this.state.searchKeywords;
+        }
+
+        _product.getProductList(listParam).then(
             res => {
                 this.setState(res)
             },
@@ -55,7 +65,16 @@ class ProductList extends React.Component{
             }
     }
     onSearch(searchType,searchKeywords){
-        console.log(searchType,searchKeywords)
+        let listType = searchKeywords !== '' ? 'search' : 'list';
+        this.setState({
+            listType       : listType,
+            pageNum        : 1,
+            searchType     : searchType,
+            searchKeywords : searchKeywords
+        }, () => {
+            this.loadProductList();
+        })
+
     }
     render(){
         let tableHeads = [
