@@ -1,6 +1,7 @@
 import React      from 'react';
 import PageTitle  from 'component/page-title/index.jsx' 
 import CategorySelector from 'page/product/index/category-selector.jsx';
+import FileUploader from 'util/file-uploader/index.jsx';
 
 import MUtil      from 'util/mm.jsx';
 import Product    from 'service/product-service.jsx';
@@ -9,11 +10,22 @@ const _mm      =   new MUtil();
 const _product =   new Product();
 
 class ProductSave extends React.Component{
+
+    constructor(props){
+        super(props)
+        this.state = {
+            categoryId        : 0,
+            parentCategoryId  : 0
+        }
+    }
+    onCategoryChange(categoryId, parentCategoryId){
+        console.log(categoryId, parentCategoryId)
+    }
     render(){
         return  (
             <div id="page-wrapper">
                     <PageTitle title="商品添加" />
-                    <form className="form-horizontal">
+                    <div className="form-horizontal">
                         <div className="form-group">
                             <label className="col-md-2 control-label">商品名称</label>
                             <div className="col-md-5">
@@ -28,7 +40,9 @@ class ProductSave extends React.Component{
                         </div>
                         <div className="form-group">
                             <label className="col-md-2 control-label">所属分类</label>
-                            <CategorySelector />
+                            <CategorySelector onCategoryChange={
+                                (categoryId, parentCategoryId) => {this.onCategoryChange(categoryId, parentCategoryId)}
+                            }/>
                         </div>
                         <div className="form-group">
                             <label className="col-md-2 control-label">商品价格</label>
@@ -51,7 +65,7 @@ class ProductSave extends React.Component{
                         <div className="form-group">
                             <label className="col-md-2 control-label">商品图片</label>
                             <div className="col-md-3">
-                                 xxx
+                            <FileUploader />
                             </div>
                         </div>
                         <div className="form-group">
@@ -65,7 +79,7 @@ class ProductSave extends React.Component{
                                 <button type="submit" className="btn btn-primary">提交</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
             </div>
         )
     }

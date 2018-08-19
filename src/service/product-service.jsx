@@ -37,11 +37,23 @@ class Product {
         })
     }
 
+    // 变更产品销售状态
     setProductStatus(productInfo){
         return _mm.request({
             type: 'post',
             url : '/manage/product/set_sale_status.do',
             data: productInfo
+        })
+    }
+
+    // 获取一级分类列表
+    getCategoryList(parentCategoryId){
+        return _mm.request({
+            type : 'POST',
+            url : '/manage/category/get_category.do',
+            data : {
+                categoryId : parentCategoryId || 0
+            }
         })
     }
 }

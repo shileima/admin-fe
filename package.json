@@ -6,8 +6,8 @@
   "author": "loading",
   "license": "MIT",
   "scripts": {
-    "dev" : "./node_modules/.bin/webpack-dev-server",
-    "dist" : "./node_modules/.bin/webpack -p"
+    "dev": "./node_modules/.bin/webpack-dev-server",
+    "dist": "./node_modules/.bin/webpack -p"
   },
   "devDependencies": {
     "babel-core": "6.26.0",
@@ -27,8 +27,11 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
+    "prop-types": "15.6.0",
+    "rc-pagination": "^1.16.5",
     "react": "16.2.0",
     "react-dom": "16.2.0",
+    "react-fileupload": "^2.4.0",
     "react-router-dom": "^4.2.2"
   }
 }
