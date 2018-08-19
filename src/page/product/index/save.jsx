@@ -2,6 +2,8 @@ import React      from 'react';
 import PageTitle  from 'component/page-title/index.jsx' 
 import CategorySelector from 'page/product/index/category-selector.jsx';
 import FileUploader from 'util/file-uploader/index.jsx';
+import RichEditor from 'util/rich-editor/index.jsx'
+
 import '../save.scss';
 
 import MUtil      from 'util/mm.jsx';
@@ -15,14 +17,32 @@ class ProductSave extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            name              : '',
+            subtitle          : '',
             categoryId        : 0,
             parentCategoryId  : 0,
-            subImages         : []
+            subImages         : [],
+            price             : '',
+            stock             : '',
+            detail            : '',
+            price             : '',
+            status            : 1 // 商品默认添加状态是在售
         }
     }
 
+    onValueChange(e){
+        let name  = e.target.name,
+            value = e.target.value;
+        this.setState({
+            [name] : value
+        })
+    }
+
     onCategoryChange(categoryId, parentCategoryId){
-        console.log(categoryId, parentCategoryId)
+        this.setState({
+            categoryId       : categoryId,
+            parentCategoryId : parentCategoryId
+        })
     }
 
     onUploadSeccess(res){
@@ -46,6 +66,43 @@ class ProductSave extends React.Component{
         })
     }
 
+    onDetailValueChange(value){
+        this.setState({
+            detail : value
+        })
+    }
+
+    getSubImages(){
+        return this.state.subImages.map(image => image.uri ).join(',');
+    }
+
+    // 提交表单
+    onSubmit(){
+        let product = {
+            name : this.state.name,
+            subtitle   : this.state.subtitle,
+            categoryId : this.state.categoryId,
+            subImages  : this.getSubImages(),
+            detail     : this.state.detail,
+            price      : this.state.price,
+            stock      : this.state.stock,
+            status     : this.state.status,
+        }
+        console.log(product);
+        
+        /* productCheckResult = _product.checkProduct(product);
+        if(productCheckResult.status){
+            _product.saveProduct().then(res=>{
+                _mm.successTips(res)
+                this.props.history.push('/product/index')
+            }, errMsg => {
+                _mm.errTips(errMsg)
+            })
+        }else{
+            _mm.errTips(productCheckResult.msg)
+        } */
+    }
+
     render(){
         return  (
             <div id="page-wrapper">
@@ -54,13 +111,17 @@ class ProductSave extends React.Component{
                         <div className="form-group">
                             <label className="col-md-2 control-label">商品名称</label>
                             <div className="col-md-5">
-                            <input type="text" className="form-control" placeholder="请输入商品名称"/>
+                            <input type="text" className="form-control" placeholder="请输入商品名称"
+                            name = "name"
+                            onChange={e=>{this.onValueChange(e)}}/>
                             </div>
                         </div>
                         <div className="form-group">
                             <label className="col-md-2 control-label">商品描述</label>
                             <div className="col-md-5">
-                            <input type="password" className="form-control" placeholder="请输入商品描述"/>
+                            <input type="text" className="form-control" placeholder="请输入商品描述"
+                            name = "subtitle"
+                            onChange={e=>{this.onValueChange(e)}}/>
                             </div>
                         </div>
                         <div className="form-group">
@@ -73,7 +134,9 @@ class ProductSave extends React.Component{
                             <label className="col-md-2 control-label">商品价格</label>
                             <div className="col-md-3">
                                 <div className="input-group">
-                                    <input type="number" className="form-control" placeholder="价格"/>
+                                    <input type="number" className="form-control" placeholder="价格"
+                                    name = "price"
+                                    onChange={e=>{this.onValueChange(e)}}/>
                                     <span className="input-group-addon">元</span>
                                 </div>
                             </div>
@@ -82,7 +145,9 @@ class ProductSave extends React.Component{
                             <label className="col-md-2 control-label">商品库存</label>
                             <div className="col-md-3">
                                 <div className="input-group">
-                                    <input type="number" className="form-control" placeholder="库存"/>
+                                    <input type="number" className="form-control" placeholder="库存"
+                                    name = "stock"
+                                    onChange={e=>{this.onValueChange(e)}}/>
                                     <span className="input-group-addon">件</span>
                                 </div>
                             </div>
@@ -108,13 +173,17 @@ class ProductSave extends React.Component{
                         </div>
                         <div className="form-group">
                             <label className="col-md-2 control-label">商品详情</label>
-                            <div className="col-md-3">
-                                detail
+                            <div className="col-md-8">
+                                <RichEditor placeholder="请输入内容" 
+                                onValueChange={(value)=>{this.onDetailValueChange(value)}}
+                                name = "subtitle"
+                                onChange={e=>{this.onValueChange(e)}}/>
                             </div>
                         </div>
                         <div className="form-group">
                             <div className="col-md-offset-2 col-md-5">
-                                <button type="submit" className="btn btn-primary">提交</button>
+                                <button type="submit" className="btn btn-primary"
+                                onClick={e=>{this.onSubmit()}}>提交</button>
                             </div>
                         </div>
                     </div>
