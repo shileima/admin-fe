@@ -81,18 +81,18 @@ class ProductSave extends React.Component{
         let product = {
             name : this.state.name,
             subtitle   : this.state.subtitle,
-            categoryId : this.state.categoryId,
+            categoryId : parseInt(this.state.categoryId),
             subImages  : this.getSubImages(),
             detail     : this.state.detail,
-            price      : this.state.price,
-            stock      : this.state.stock,
+            price      : parseFloat(this.state.price),
+            stock      : parseInt(this.state.stock),
             status     : this.state.status,
         }
-        console.log(product);
+        // console.log(product);
         
-        /* productCheckResult = _product.checkProduct(product);
+        let productCheckResult = _product.checkProduct(product);
         if(productCheckResult.status){
-            _product.saveProduct().then(res=>{
+            _product.saveProduct(product).then(res=>{
                 _mm.successTips(res)
                 this.props.history.push('/product/index')
             }, errMsg => {
@@ -100,7 +100,7 @@ class ProductSave extends React.Component{
             })
         }else{
             _mm.errTips(productCheckResult.msg)
-        } */
+        }
     }
 
     render(){
