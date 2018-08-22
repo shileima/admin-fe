@@ -97,7 +97,7 @@ class Product {
         });
     }
 
-    // 获取一级分类列表
+    // 获取一、二级分类列表
     getCategoryList(parentCategoryId){
         return _mm.request({
             type : 'POST',

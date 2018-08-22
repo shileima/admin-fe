@@ -16,20 +16,17 @@ class CategorySelector extends React.Component{
             secondCategoryId   : 0
         }
     }
-
     componentDidMount(){
         this.loadFirstCategory()
     }
-    
     // 加载一级分类
     loadFirstCategory(){
         _product.getCategoryList().then(res => {
             this.setState({
                 firstCategoryList : res
-            }, errMsg => {
+            })}, errMsg => {
                 _mm.errTips(errMsg)
             })
-        })
     }
 
     // 加载二级分类
@@ -37,9 +34,8 @@ class CategorySelector extends React.Component{
         _product.getCategoryList(this.state.firstCategoryId).then(res => {
             this.setState({
                 secondCategoryList : res
-            }, errMsg => {
+            })}, errMsg => {
                 _mm.errTips(errMsg)
-            })
         })
     }
 
