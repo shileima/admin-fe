@@ -47,6 +47,7 @@ class ProductSave extends React.Component{
                     url : res.imageHost + image
                 }
             })
+            res.defaultDetail = res.detail;
             this.setState(res);
         }, errMsg => {
             _mm.errTips(errMsg)
@@ -209,7 +210,8 @@ class ProductSave extends React.Component{
                                 <RichEditor placeholder="请输入内容" 
                                 onValueChange={(value)=>{this.onDetailValueChange(value)}}
                                 name = "detail"
-                                detail={this.state.detail}
+                                /* detail={this.state.detail} */
+                                defaultDetail={this.state.defaultDetail}
                                 onChange={e=>{this.onValueChange(e)}}/>
                             </div>
                         </div>

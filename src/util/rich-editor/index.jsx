@@ -29,11 +29,9 @@ class RichEditor extends React.Component{
     }
 
     componentWillReceiveProps(nextProps){
-        let detailChange = this.props.detail !== nextProps.detail;
-        if(!detailChange){
-            return;
-        }
-        this.simditor.setValue(nextProps.detail)
+        if(this.props.defaultDetail !== nextProps.defaultDetail){
+            this.simditor.setValue(nextProps.defaultDetail)
+        }  
     }
 
     render(){
