@@ -1,6 +1,7 @@
 import React        from 'react';
 import Simditor     from  'simditor';
 import 'simditor/styles/simditor.scss';
+import './index.scss';
 
 // 通用的富文本编辑器，依赖 jquery
 class RichEditor extends React.Component{
@@ -11,8 +12,6 @@ class RichEditor extends React.Component{
 
     loadEditor(){
         let element = this.refs['textarea'];
-        console.log(element)
-        console.log($(element))
         this.simditor = new Simditor({
             textarea : element,
             defaultValue : this.props.placeholder || "请输入内容",
@@ -27,6 +26,14 @@ class RichEditor extends React.Component{
         this.simditor.on('valuechanged', e => {
             this.props.onValueChange(this.simditor.getValue())
         })
+    }
+
+    componentWillReceiveProps(nextProps){
+        let detailChange = this.props.detail !== nextProps.detail;
+        if(!detailChange){
+            return;
+        }
+        this.simditor.setValue(nextProps.detail)
     }
 
     render(){

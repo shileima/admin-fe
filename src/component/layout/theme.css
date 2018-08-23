@@ -79,7 +79,6 @@ position: fixed;
   position: fixed;
   width: 260px;
   top: 60px;
-  overflow-y: scroll;
   background-color: #2b2e33;
 }
 #page-wrapper {

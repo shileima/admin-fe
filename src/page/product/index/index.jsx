@@ -115,7 +115,7 @@ class ProductList extends React.Component{
                                 <td>
                                     <Link to={ `/product/detail/${product.id}` }>查看详情</Link>
                                     <br/>
-                                    <Link to={ `/product/detail/${product.id}` }>编辑</Link>
+                                    <Link to={ `/product/edit/${product.id}` }>编辑</Link>
                                 </td>
                             </tr>
                         )

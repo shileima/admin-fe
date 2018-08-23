@@ -107,6 +107,17 @@ class Product {
             }
         })
     }
+
+    // 获取商品详情信息
+    getProductDetail(productId){
+        return _mm.request({
+            type : 'POST',
+            url : '/manage/product/detail.do',
+            data : {
+                productId : productId
+            }
+        })
+    }
 }
 
 export default Product;
