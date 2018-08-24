@@ -84,7 +84,6 @@ class Product {
                 msg: '请输入正确的库存数量'
             }
         }
-
         return result;
     }
 
@@ -116,6 +115,15 @@ class Product {
             data : {
                 productId : productId
             }
+        })
+    }
+
+    // 修改品类名称
+    setCategoryName(categoryInfo){
+        return _mm.request({
+            type : 'POST',
+            url : '/manage/category/set_category_name.do',
+            data : categoryInfo
         })
     }
 }

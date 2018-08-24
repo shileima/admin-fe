@@ -1,32 +1,35 @@
 import React      from 'react';
-import { Link }   from 'react-router-dom';
 import PageTitle  from 'component/page-title/index.jsx';
-import Pagination from 'util/pagination/index.jsx';
-import 'rc-pagination/dist/rc-pagination.min.css';
-
 import MUtil      from 'util/mm.jsx';
 import Product    from 'service/product-service.jsx';
 
 const _mm      =   new MUtil();
 const _product =   new Product();
 
-class ProductList extends React.Component{
+class CategoryList extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            categoryId: 0,
             list: [],
-            pageNum: 1,
             firstLoading: true
         }
     }
     componentDidMount(){
-        this.loadProductList();
+        this.loadCategoryList();
     }
-    loadProductList(){
-        _product.getProductList(this.state.pageNum).then(
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.categoryId !== this.state.categoryId){
+            this.loadCategoryList(this.state.categoryId)
+        }
+
+    }
+    loadCategoryList(){
+        _product.getCategoryList(this.state.categoryId).then(
             res => {
                 this.setState(res,()=>{
                     this.setState({
+                        list: res,
                         firstLoading: false
                     })
                 })
@@ -35,29 +38,39 @@ class ProductList extends React.Component{
                 _mm.errTips(errMsg)
             })
     }
-    onPageNumChange(pageNum){
-        this.setState({
-            pageNum: pageNum
-        }, () => {
-            this.loadProductList();
+    onChangeCategoryName(categoryId, categoryName){
+        let newName = window.prompt('请输入修改名称', categoryName)
+        let categoryInfo ={
+            categoryId   : categoryId,
+            categoryName : newName
+        }
+        _product.setCategoryName(categoryInfo).then(res=>{
+            _mm.successTips(res.msg);
+            this.loadCategoryList();
+
+        }, errMsg => {
+            _mm.errTips(errMsg)
         })
     }
+
+    onChildCategory(categoryId){
+        this.setState({
+            categoryId : categoryId
+        })
+    }
+
     render(){
-        let listBody = this.state.list.map((user,index) => {
+        let listBody = this.state.list.map((category,index) => {
             return (
                 <tr key={index}>
-                    <td>{user.id}</td>
-                    <td>{user.username}</td>
-                    <td>{user.email}</td>
-                    <td>{user.phone}</td>
-                    
-                    {/* toLocaleDateString() 只返回日期 2018/6/10 */}
-                    {/* <td>{new Date(user.createTime).toLocaleDateString()}</td> */
-}
-
-                    {/* toLocaleString() 返回日期和时间 2018/6/10 下午9:21:33 */}
-                    <td>{new Date(user.createTime).toLocaleString()}</td>
-
+                    <td>{category.id}</td>
+                    <td>{category.name}</td>
+                    <td><a href="javascript:;" 
+                        onClick={() => this.onChangeCategoryName(category.id,category.name)}>修改名称 </a>
+                        {category.parentId === 0 ? (<a /* href={'/product-category/index/' + category.id} */ href="javascript:;" 
+                        onClick={()=>{this.onChildCategory(category.id)}}> 查看子分类</a>): null}
+                        
+                    </td>
                 </tr>
             )
         })
@@ -70,17 +83,16 @@ class ProductList extends React.Component{
         )
         let tableBody = this.state.list.length > 0? listBody : listError;
         return <div id="page-wrapper">
-            <PageTitle title="用户列表"></PageTitle>
+            <PageTitle title="品类列表"></PageTitle>
+            <p>当前的品类ID：{this.state.categoryId}</p>
             <div className="row">
                 <div className="col-md-12">
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>用户名</th>
-                                <th>邮箱</th>
-                                <th>电话</th>
-                                <th>注册时间</th>
+                                <th>品类ID</th>
+                                <th>品类名称</th>
+                                <th>品类操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,13 +101,8 @@ class ProductList extends React.Component{
                     </table>
                 </div>
             </div>
-            <Pagination 
-                current={this.state.pageNum} 
-                total={this.state.total} 
-                onChange={ pageNum => this.onPageNumChange(pageNum) } 
-            />
         </div>
     }
 }
 
-export default ProductList;
+export default CategoryList;
