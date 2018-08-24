@@ -118,6 +118,15 @@ class Product {
             }
         })
     }
+
+    // 修改品类名称
+    updateCategoryName(categoryInfo){
+        return _mm.request({
+            type : 'POST',
+            url : '/manage/category/set_category_name.do',
+            data : categoryInfo
+        })
+    }
 }
 
 export default Product;
