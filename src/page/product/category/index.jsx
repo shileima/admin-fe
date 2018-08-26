@@ -1,4 +1,5 @@
 import React      from 'react';
+import { Link }   from 'react-router-dom';
 import PageTitle  from 'component/page-title/index.jsx';
 import MUtil      from 'util/mm.jsx';
 import Product    from 'service/product-service.jsx';
@@ -10,7 +11,7 @@ class CategoryList extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            categoryId: 0,
+            categoryId: this.props.match.params.cid || 0,
             list: [],
             firstLoading: true
         }
@@ -19,19 +20,26 @@ class CategoryList extends React.Component{
         this.loadCategoryList();
     }
     componentDidUpdate(prevProps, prevState){
-        if(prevState.categoryId !== this.state.categoryId){
-            this.loadCategoryList(this.state.categoryId)
+        /* console.log(prevProps.match.params.cid)
+        console.log(this.props.match.params.cid) */
+        if(this.props.location !== prevProps.location){
+            this.setState({
+                categoryId : this.props.match.params.cid
+            }, ()=>{
+                this.loadCategoryList()
+            })
+            
+            /* this.props.history.push('/product-category/index/' + this.state.categoryId)
+            console.log(this.props.history) */
         }
 
     }
     loadCategoryList(){
         _product.getCategoryList(this.state.categoryId).then(
             res => {
-                this.setState(res,()=>{
-                    this.setState({
-                        list: res,
-                        firstLoading: false
-                    })
+                this.setState({
+                    list: res,
+                    firstLoading: false
                 })
             },
             errMsg => {
@@ -53,11 +61,11 @@ class CategoryList extends React.Component{
         })
     }
 
-    onChildCategory(categoryId){
+    /* onChildCategory(categoryId){
         this.setState({
             categoryId : categoryId
         })
-    }
+    } */
 
     render(){
         let listBody = this.state.list.map((category,index) => {
@@ -67,8 +75,10 @@ class CategoryList extends React.Component{
                     <td>{category.name}</td>
                     <td><a href="javascript:;" 
                         onClick={() => this.onChangeCategoryName(category.id,category.name)}>修改名称 </a>
-                        {category.parentId === 0 ? (<a /* href={'/product-category/index/' + category.id} */ href="javascript:;" 
-                        onClick={()=>{this.onChildCategory(category.id)}}> 查看子分类</a>): null}
+                        {category.parentId === 0 
+                        ? (<Link to = {`/product-category/index/${category.id}`} /* href="javascript:;" */ 
+                        /* onClick={()=>{this.onChildCategory(category.id)}} */> 查看子分类</Link>)
+                        : null}
                         
                     </td>
                 </tr>
