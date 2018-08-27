@@ -1,0 +1,173 @@
+[33mcommit 2b7e3f0efd95392bf64ebcc7c005e8b39934257f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Loading <shileima@hotmail.com>
+Date:   Fri Aug 24 16:37:14 2018 +0800
+
+    增加品类展示及修改功能
+
+[33mcommit 563c892e8beb93359461444c042710247f061377[m[33m ([m[1;33mtag: tag-product[m[33m)[m
+Author: Loading <shileima@hotmail.com>
+Date:   Fri Aug 24 12:29:33 2018 +0800
+
+    增加商品详情页功能
+
+[33mcommit 542d6afa7d4f9dd080534ab4d15da30ecfe47f9f[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Thu Aug 23 22:42:14 2018 +0800
+
+    修复富文本增加图片 bug
+
+[33mcommit cc57527b53399452a75f1b139cbf495ad8052619[m
+Author: Loading <shileima@hotmail.com>
+Date:   Thu Aug 23 15:57:45 2018 +0800
+
+    实现商品编辑功能
+
+[33mcommit 1ee1cafec7d7e9b57db55aacf4541c686a928f46[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Wed Aug 22 22:49:25 2018 +0800
+
+    修复添加产品弹出错误
+
+[33mcommit ab5bb7ec3ff7a32e1ecd0106908641c49c1685c4[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Tue Aug 21 22:58:54 2018 +0800
+
+    完成商品上传验证和保存(下)
+
+[33mcommit 2b87f12c789041f824a9a030a9a16275af2005ad[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sun Aug 19 22:07:37 2018 +0800
+
+    商品上传富文本及各字段获取完成,待验证字段及保存操作
+
+[33mcommit 04542456b16ddacfd2ab68cf4bc73fe599c7eb8a[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sun Aug 19 16:58:54 2018 +0800
+
+    商品上传页面完成图片上传和删除功能
+
+[33mcommit 819c9facadc84b0a34f6bf0f1db37be139e6b5e7[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sun Aug 19 15:03:09 2018 +0800
+
+    商品上传页面品类选择框及图片上传完成
+
+[33mcommit b38736445da40221d67be3bfab5c7f5f2756db31[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sat Aug 18 23:54:51 2018 +0800
+
+    增加商品添加功能(上)
+
+[33mcommit 3f62f6deb76d4c84febcb0e8e35ce79b718d0c22[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Thu Aug 16 22:14:59 2018 +0800
+
+    增加搜索功能(下)
+
+[33mcommit 7d8bd91ef0b6d50c3d60e713d7f688ec31fed870[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Wed Aug 15 00:14:55 2018 +0800
+
+    增加搜索功能(上)
+
+[33mcommit 7ec22cb2269c65e9229ce5250f25244370f37747[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Mon Jul 30 23:27:38 2018 +0800
+
+    通用组件tablelist渲染用户信息数据
+
+[33mcommit 0ef861277d60e081552e8381feb6b7ec6989dad7[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Mon Jun 25 23:27:03 2018 +0800
+
+     增加产品状态设置功能
+
+[33mcommit 16c847e4c91fdd9a4d6a6039be069aa1e9886e41[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Mon Jun 18 12:39:47 2018 +0800
+
+     增加产品列表页面
+
+[33mcommit 72d285ceda85ff15820c57f700c517965a9bcda3[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sun Jun 10 21:41:37 2018 +0800
+
+    增加后台首页数据展示，增加用户页面展示
+
+[33mcommit 8dc15f18fbfe11e08954889de9fc1c5672486100[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Fri Jun 8 23:07:31 2018 +0800
+
+    增加退出功能
+
+[33mcommit cec68dd25c3ffd38a65d60a8c159c5021145fd4e[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sun Jun 3 22:24:44 2018 +0800
+
+    登录前端和服务器验证，封装 service 方法，设置 localstorage
+
+[33mcommit 87d344be1ae742cf419189911af01110ddbef4af[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sat Jun 2 22:14:14 2018 +0800
+
+    完善后台，增加登录页面
+
+[33mcommit 01553919cdaace83e284f1448843d22a125dc6b5[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Tue May 22 21:38:45 2018 +0800
+
+    后台首页搭建
+
+[33mcommit 1ca4582eecd85faa67d109de2634478e8f62ec06[m
+Author: Loading <shileima@hotmail.com>
+Date:   Tue May 15 17:49:28 2018 +0800
+
+    react browser router
+
+[33mcommit d70ef549140fc8ebd7a35da854449f39ad6e8fda[m
+Author: Loading <shileima@hotmail.com>
+Date:   Tue May 15 16:08:33 2018 +0800
+
+    深入webpack常用配置loader,dev-server,scripts等
+
+[33mcommit 701967f46659dc3a89efbea58ff2be98b3bf9f4a[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sat May 12 22:08:52 2018 +0800
+
+    router 介绍及 react-router 之 HashRouter
+
+[33mcommit 9d8bd5e0bc04aa6e392b9fc35a8d2b61f3842ffd[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Wed May 9 22:07:53 2018 +0800
+
+    兄弟组件之间通信和子组件向父组件传值
+
+[33mcommit 61ae186e96d19d81fdd0def917986ba37fdefef8[m
+Author: Loading <shileima@hotmail.com>
+Date:   Wed May 9 17:42:38 2018 +0800
+
+    react ComponentDidMount 中setState()是异步的
+
+[33mcommit 114cfed764b7f9ff60afb89350246572774f1608[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Tue May 8 23:37:15 2018 +0800
+
+     安装自动打包热加载 webpack-dev-server
+
+[33mcommit 38a85f2fe19505b34e9d4cf74d98b40e8ddf523b[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Tue May 8 23:22:58 2018 +0800
+
+    实践 jsx 语法，修复 this 指向
+
+[33mcommit 30b3b64e8225e3731b9c51b7a33eda94ac1e6a2a[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sat May 5 23:08:32 2018 +0800
+
+    webpack+react环境配置完成
+
+[33mcommit 57cfae64379c73107b39d6f80e22252b00e01a21[m
+Author: Shilei Ma <604237073@qq.com>
+Date:   Sat May 5 19:58:07 2018 +0800
+
+    yarn init

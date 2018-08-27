@@ -1,9 +1,6 @@
 import React      from 'react';
 import { Link }   from 'react-router-dom';
 import PageTitle  from 'component/page-title/index.jsx';
-import Pagination from 'util/pagination/index.jsx';
-import 'rc-pagination/dist/rc-pagination.min.css';
-
 import MUtil      from 'util/mm.jsx';
 import Product    from 'service/product-service.jsx';
 
@@ -14,8 +11,9 @@ class CategoryList extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            categoryId: this.props.match.params.cid || 0,
             list: [],
-            categoryId : 0
+            firstLoading: true
         }
     }
 
@@ -23,29 +21,27 @@ class CategoryList extends React.Component{
     componentDidMount(){
         this.loadCategoryList();
     }
-
-    // 组件更新执行
     componentDidUpdate(prevProps, prevState){
-        let childCategoryId = this.props.match.params.categoryId,
-            oldPath         = prevProps.location.pathname,
-            newpath         = this.props.location.pathname;
-
-        if(oldPath !== newpath){
+        /* console.log(prevProps.match.params.cid)
+        console.log(this.props.match.params.cid) */
+        if(this.props.location !== prevProps.location){
             this.setState({
-                categoryId : childCategoryId
-            }, () => {
-                this.loadCategoryList();
-            });
+                categoryId : this.props.match.params.cid
+            }, ()=>{
+                this.loadCategoryList()
+            })
+            
+            /* this.props.history.push('/product-category/index/' + this.state.categoryId)
+            console.log(this.props.history) */
         }
 
     }
     loadCategoryList(){
         _product.getCategoryList(this.state.categoryId).then(
             res => {
-                this.setState(res,()=>{
-                    this.setState({
-                        list : res
-                    })
+                this.setState({
+                    list: res,
+                    firstLoading: false
                 })
                  // console.log(this.state.list)
             },
@@ -54,19 +50,27 @@ class CategoryList extends React.Component{
             })
 
     }
-    // 更新品类的名字
-    onUpdateName(categoryId, categoryName){
-        let newName = window.prompt("请输入新的品类名称", categoryName);
-        _product.updateCategoryName({
+
+    onChangeCategoryName(categoryId, categoryName){
+        let newName = window.prompt('请输入修改名称', categoryName)
+        let categoryInfo ={
             categoryId   : categoryId,
             categoryName : newName
-        }).then(res => {
-            _mm.successTips(res.msg)
+        }
+        _product.setCategoryName(categoryInfo).then(res=>{
+            _mm.successTips(res.msg);
             this.loadCategoryList();
+
         }, errMsg => {
             _mm.errTips(errMsg)
         })
     }
+
+    /* onChildCategory(categoryId){
+        this.setState({
+            categoryId : categoryId
+        })
+    } */
 
     render(){
         let listBody = this.state.list.map((category,index) => {
@@ -74,14 +78,15 @@ class CategoryList extends React.Component{
                 <tr key={index}>
                     <td>{category.id}</td>
                     <td>{category.name}</td>
-                    <td>
-                        <a className="opera"
-                            onClick={ e => this.onUpdateName(category.id, category.name) }>
-                        修改名称 </a>
-                        {category.parentId === 0 ?
-                            <Link to={`/product-category/index/${category.id}`}>子品类</Link>: ""}
-                    </td>
 
+                    <td><a href="javascript:;" 
+                        onClick={() => this.onChangeCategoryName(category.id,category.name)}>修改名称 </a>
+                        {category.parentId === 0 
+                        ? (<Link to = {`/product-category/index/${category.id}`} /* href="javascript:;" */ 
+                        /* onClick={()=>{this.onChildCategory(category.id)}} */> 查看子分类</Link>)
+                        : null}
+                        
+                    </td>
                 </tr>
             )
         })
@@ -95,11 +100,7 @@ class CategoryList extends React.Component{
         let tableBody = this.state.list.length > 0? listBody : listError;
         return <div id="page-wrapper">
             <PageTitle title="品类列表"></PageTitle>
-            <div className="row">
-                <div className="col-md-12">
-                    <p>父品类ID : {this.state.categoryId}</p>
-                </div>
-            </div>
+            <p>当前的品类ID：{this.state.categoryId}</p>
             <div className="row">
                 <div className="col-md-12">
                     <table className="table table-striped table-bordered">
@@ -107,7 +108,7 @@ class CategoryList extends React.Component{
                             <tr>
                                 <th>品类ID</th>
                                 <th>品类名称</th>
-                                <th>操作</th>
+                                <th>品类操作</th>
                             </tr>
                         </thead>
                         <tbody>
