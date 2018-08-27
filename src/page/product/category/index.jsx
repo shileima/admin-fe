@@ -99,8 +99,14 @@ class CategoryList extends React.Component{
         )
         let tableBody = this.state.list.length > 0? listBody : listError;
         return <div id="page-wrapper">
-            <PageTitle title="品类列表"></PageTitle>
-            <p>当前的品类ID：{this.state.categoryId}</p>
+            <PageTitle title="品类列表">
+                <div className="page-header-right">
+                    <Link className="btn btn-primary" to="/product-category/add">
+                        <i className="fa fa-plus"></i>
+                        <span>添加品类</span>
+                    </Link>
+                </div>
+            </PageTitle>
             <div className="row">
                 <div className="col-md-12">
                     <table className="table table-striped table-bordered">

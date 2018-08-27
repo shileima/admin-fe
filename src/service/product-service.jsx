@@ -126,6 +126,15 @@ class Product {
             data : categoryInfo
         })
     }
+
+    // 增加品类
+    addCategory(addCategoryInfo){
+        return _mm.request({
+            type : 'POST',
+            url : '/manage/category/add_category.do',
+            data : addCategoryInfo
+        })
+    }
 }
 
 export default Product;
