@@ -39,6 +39,9 @@ class OrderList extends React.Component{
             },
             errMsg => {
                 _mm.errTips(errMsg)
+                this.setState({
+                    list : []
+                })
             })
     }
     onPageNumChange(pageNum){
@@ -67,6 +70,8 @@ class OrderList extends React.Component{
                 {
                     this.state.list.map((order,index) => {
                         return (
+                            this.state.list.length == 0 ? '<tr>没有找到相应的结果</tr>' 
+                            :
                             <tr key={index}>
                                 <td>{order.orderNo}</td>
                                 <td>
@@ -75,9 +80,9 @@ class OrderList extends React.Component{
                                 <td>{order.statusDesc}</td>
                                 <td>￥{order.payment}</td>
                                 <td>
-                                    <Link to={ `/order/detail/${order.id}` }>查看详情</Link>
+                                    <Link to={ `/order/detail/${order.orderNo}` }>查看详情</Link>
                                     <br/>
-                                    <Link to={ `/order/edit/${order.id}` }>编辑</Link>
+                                    <Link to={ `/order/edit/${order.orderNo}` }>编辑</Link>
                                 </td>
                             </tr>
                         )
